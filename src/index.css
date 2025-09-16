@@ -52,6 +52,18 @@
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* 3D and Glass Effects */
+    --glass-bg: hsla(var(--background), 0.7);
+    --glass-border: hsla(var(--border), 0.2);
+    --glass-shadow: 0 8px 32px hsla(var(--primary), 0.1);
+    --glass-backdrop: blur(12px) saturate(180%);
+    
+    /* 3D Transforms */
+    --transform-3d: perspective(1000px) rotateX(2deg) rotateY(-2deg);
+    --transform-hover: perspective(1000px) rotateX(-5deg) rotateY(5deg) scale(1.02);
+    --shadow-3d: 0 20px 40px hsla(var(--primary), 0.15), 0 10px 20px hsla(var(--primary), 0.1);
+    --shadow-hover: 0 30px 60px hsla(var(--primary), 0.2), 0 15px 30px hsla(var(--primary), 0.15);
 
     --sidebar-background: 0 0% 98%;
 
@@ -111,6 +123,12 @@
     --gradient-card: linear-gradient(135deg, hsl(215 28% 17%), hsl(217.2 32.6% 17.5%));
     --gradient-header: linear-gradient(135deg, hsl(217.2 91.2% 59.8%), hsl(224.3 76.3% 48%));
     --gradient-math: linear-gradient(135deg, hsl(215 28% 17%), hsl(217.2 32.6% 17.5%));
+    
+    /* Dark mode 3D and Glass Effects */
+    --glass-bg: hsla(var(--background), 0.8);
+    --glass-border: hsla(var(--border), 0.3);
+    --glass-shadow: 0 8px 32px hsla(var(--primary), 0.15);
+    --glass-backdrop: blur(16px) saturate(200%);
   }
 }
 
@@ -154,6 +172,64 @@
   
   .hover-lift {
     @apply transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+  }
+
+  /* Glass morphism effects */
+  .glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* 3D Transform effects */
+  .transform-3d {
+    transform: var(--transform-3d);
+    box-shadow: var(--shadow-3d);
+    transition: var(--transition-smooth);
+  }
+
+  .transform-3d:hover {
+    transform: var(--transform-hover);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Advanced hover animations */
+  .hover-float {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:scale-105;
+    box-shadow: var(--shadow-3d);
+  }
+
+  .hover-float:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Rotating key animation */
+  .key-rotate {
+    animation: rotateKey 4s linear infinite;
+  }
+
+  @keyframes rotateKey {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  /* Pulsing glow effect */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    from {
+      box-shadow: 0 0 20px hsla(var(--primary), 0.3);
+    }
+    to {
+      box-shadow: 0 0 40px hsla(var(--primary), 0.6), 0 0 60px hsla(var(--primary), 0.3);
+    }
   }
 }
 

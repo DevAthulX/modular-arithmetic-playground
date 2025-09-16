@@ -183,15 +183,28 @@ export function RSADemo() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="header-gradient text-primary-foreground py-8 px-4">
+      <header className="header-gradient text-primary-foreground py-8 px-4 relative overflow-hidden">
         <div className="container mx-auto max-w-4xl">
           <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-4xl font-bold mb-2">Interactive RSA Encryption Learner</h1>
-              <p className="text-lg opacity-90">Class 12 Mathematics • Cryptography & Number Theory</p>
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <Key className="w-12 h-12 key-rotate pulse-glow" />
+                <div className="absolute inset-0 w-12 h-12 rounded-full bg-primary/20 blur-lg animate-pulse"></div>
+              </div>
+              <div>
+                <h1 className="text-4xl font-bold mb-2 hover:scale-105 transition-all duration-300">
+                  Interactive RSA Encryption Learner
+                </h1>
+                <p className="text-lg opacity-90">Class 12 Mathematics • Cryptography & Number Theory</p>
+              </div>
             </div>
             <ThemeToggle />
           </div>
+        </div>
+        {/* Animated background elements */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-accent/10 rounded-full blur-2xl animate-pulse" style={{animationDelay: '1s'}}></div>
         </div>
       </header>
 
@@ -199,7 +212,7 @@ export function RSADemo() {
       <main className="container mx-auto max-w-4xl p-4 space-y-6">
         
         {/* Progress Indicator */}
-        <Card className="card-gradient">
+        <Card className="glass-card hover-float transform-3d">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Calculator className="w-5 h-5" />
@@ -234,10 +247,10 @@ export function RSADemo() {
         </Card>
 
         {/* Step 1: Prime Input */}
-        <Card className="card-gradient animate-fade-in">
+        <Card className="glass-card hover-float transform-3d animate-fade-in">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Key className="w-5 h-5" />
+              <Key className="w-5 h-5 text-primary" />
               Step 1: Enter Prime Numbers
             </CardTitle>
             <CardDescription>
@@ -309,7 +322,7 @@ export function RSADemo() {
 
         {/* Step 2: Generated Keys */}
         {keyPair && (
-          <Card className="card-gradient animate-bounce-in">
+          <Card className="glass-card hover-float transform-3d animate-bounce-in">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Key className="w-5 h-5 public-key-color" />
@@ -318,7 +331,7 @@ export function RSADemo() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-4 rounded-lg math-gradient">
+                <div className="p-4 rounded-lg math-gradient hover-scale transform-3d">
                   <h4 className="font-semibold text-public-key mb-2 flex items-center gap-2">
                     <Lock className="w-4 h-4" />
                     Public Key (e, n)
@@ -329,7 +342,7 @@ export function RSADemo() {
                   </div>
                 </div>
                 
-                <div className="p-4 rounded-lg math-gradient">
+                <div className="p-4 rounded-lg math-gradient hover-scale transform-3d">
                   <h4 className="font-semibold text-private-key mb-2 flex items-center gap-2">
                     <Unlock className="w-4 h-4" />
                     Private Key (d, n)
@@ -388,10 +401,10 @@ export function RSADemo() {
 
         {/* Step 3: Encryption */}
         {encryptionResult && (
-          <Card className="card-gradient animate-bounce-in">
+          <Card className="glass-card hover-float transform-3d animate-bounce-in">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Lock className="w-5 h-5" />
+                <Lock className="w-5 h-5 text-primary" />
                 Step 3: Message Encryption
               </CardTitle>
             </CardHeader>
@@ -432,10 +445,10 @@ export function RSADemo() {
 
         {/* Step 4: Decryption */}
         {decryptionResult && (
-          <Card className="card-gradient animate-bounce-in">
+          <Card className="glass-card hover-float transform-3d animate-bounce-in pulse-glow">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-success" />
+                <CheckCircle className="w-5 h-5 text-success animate-pulse" />
                 Step 4: Message Decryption - Success!
               </CardTitle>
             </CardHeader>
