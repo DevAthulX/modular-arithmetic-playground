@@ -45,6 +45,8 @@ interface DecryptionResult {
 }
 
 export function RSADemo() {
+  console.log("RSADemo component rendering");
+  
   const [p, setP] = useState('');
   const [q, setQ] = useState('');
   const [message, setMessage] = useState('');

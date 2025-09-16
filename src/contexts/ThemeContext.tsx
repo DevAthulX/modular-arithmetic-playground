@@ -13,6 +13,8 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  console.log("ThemeProvider initializing");
+  
   const [isDark, setIsDark] = useState(() => {
     // Check for saved theme preference or default to dark mode
     const saved = localStorage.getItem('rsa-demo-theme');
