@@ -146,6 +146,20 @@ export default {
             transform: "translateX(100%)"
           }
         },
+        "shimmer-once": {
+          "0%": {
+            transform: "translateX(-100%)",
+            opacity: "0"
+          },
+          "50%": {
+            transform: "translateX(0%)",
+            opacity: "1"
+          },
+          "100%": {
+            transform: "translateX(100%)",
+            opacity: "0"
+          }
+        },
         "math-highlight": {
           "0%": {
             backgroundColor: "hsl(var(--math-formula) / 0.1)",
@@ -172,6 +186,7 @@ export default {
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
         "float": "float 6s ease-in-out infinite",
         "shimmer": "shimmer 2s ease-in-out infinite",
+        "shimmer-once": "shimmer-once 2s ease-in-out forwards",
         "math-highlight": "math-highlight 1.5s ease-in-out infinite",
       },
     },

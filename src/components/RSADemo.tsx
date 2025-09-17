@@ -442,7 +442,7 @@ export function RSADemo() {
                   Encrypted Message (Ciphertext)
                 </h4>
                 <div className="math-font text-lg break-all bg-primary/10 p-4 rounded-lg border-2 border-primary/20 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent animate-shimmer-once"></div>
                   <span className="relative z-10 font-bold text-primary">
                     [{encryptionResult.ciphertext.join(', ')}]
                   </span>
