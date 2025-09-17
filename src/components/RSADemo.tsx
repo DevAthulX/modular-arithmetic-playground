@@ -737,7 +737,7 @@ export function RSADemo() {
 
             <div className="pt-6 border-t border-muted-foreground/20">
               <p className="text-sm text-muted-foreground animate-fade-in">
-                Class 12 Mathematics Project • Educational RSA Cryptography Demo
+                Educational RSA Cryptography Demo
               </p>
             </div>
           </div>
