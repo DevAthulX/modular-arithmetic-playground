@@ -49,21 +49,30 @@
     --gradient-header: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 69% 58%));
     --gradient-math: linear-gradient(135deg, hsl(217.2 91.2% 95%), hsl(217.2 91.2% 90%));
 
-    /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Ultra Smooth Animations */
+    --transition-ultra: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-spring: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-elastic: all 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
     
-    /* 3D and Glass Effects */
-    --glass-bg: hsla(var(--background), 0.7);
-    --glass-border: hsla(var(--border), 0.2);
-    --glass-shadow: 0 8px 32px hsla(var(--primary), 0.1);
-    --glass-backdrop: blur(12px) saturate(180%);
+    /* Advanced 3D and Glass Effects */
+    --glass-bg: hsla(var(--background), 0.85);
+    --glass-border: hsla(var(--border), 0.3);
+    --glass-shadow: 0 8px 32px hsla(var(--primary), 0.12), 0 4px 16px hsla(var(--primary), 0.08);
+    --glass-backdrop: blur(20px) saturate(200%) brightness(1.1);
+    --glass-hover-bg: hsla(var(--background), 0.95);
+    --glass-hover-shadow: 0 20px 60px hsla(var(--primary), 0.2), 0 8px 32px hsla(var(--primary), 0.15);
     
-    /* 3D Transforms */
-    --transform-3d: perspective(1000px) rotateX(2deg) rotateY(-2deg);
-    --transform-hover: perspective(1000px) rotateX(-5deg) rotateY(5deg) scale(1.02);
-    --shadow-3d: 0 20px 40px hsla(var(--primary), 0.15), 0 10px 20px hsla(var(--primary), 0.1);
-    --shadow-hover: 0 30px 60px hsla(var(--primary), 0.2), 0 15px 30px hsla(var(--primary), 0.15);
+    /* Advanced 3D Transforms */
+    --transform-3d: perspective(1200px) rotateX(1deg) rotateY(-1deg) translateZ(0);
+    --transform-hover: perspective(1200px) rotateX(-8deg) rotateY(8deg) scale(1.05) translateZ(20px);
+    --transform-math: perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1.02);
+    --transform-math-hover: perspective(1000px) rotateX(-3deg) rotateY(3deg) scale(1.08) translateZ(30px);
+    --shadow-3d: 0 25px 50px hsla(var(--primary), 0.15), 0 12px 25px hsla(var(--primary), 0.1), 0 6px 12px hsla(var(--primary), 0.05);
+    --shadow-hover: 0 40px 80px hsla(var(--primary), 0.25), 0 20px 40px hsla(var(--primary), 0.2), 0 10px 20px hsla(var(--primary), 0.15);
+    --shadow-math: 0 15px 30px hsla(var(--math-formula), 0.2), 0 8px 16px hsla(var(--math-formula), 0.1);
+    --shadow-math-hover: 0 25px 50px hsla(var(--math-formula), 0.3), 0 12px 25px hsla(var(--math-formula), 0.2);
 
     --sidebar-background: 0 0% 98%;
 
@@ -132,7 +141,7 @@
   }
 }
 
-/* Custom Utility Classes */
+/* Ultra Modern 3D Components */
 @layer components {
   .card-gradient {
     background: var(--gradient-card);
@@ -158,6 +167,11 @@
     color: hsl(var(--math-formula));
   }
   
+  /* Ultra Smooth Transitions */
+  .transition-ultra {
+    transition: var(--transition-ultra);
+  }
+  
   .transition-smooth {
     transition: var(--transition-smooth);
   }
@@ -166,28 +180,37 @@
     transition: var(--transition-bounce);
   }
   
-  .hover-scale {
-    @apply transform transition-all duration-300 hover:scale-105;
+  .transition-spring {
+    transition: var(--transition-spring);
   }
   
-  .hover-lift {
-    @apply transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+  .transition-elastic {
+    transition: var(--transition-elastic);
   }
 
-  /* Glass morphism effects */
+  /* Advanced Glass Morphism */
   .glass-card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     backdrop-filter: var(--glass-backdrop);
     -webkit-backdrop-filter: var(--glass-backdrop);
     box-shadow: var(--glass-shadow);
+    transition: var(--transition-ultra);
   }
 
-  /* 3D Transform effects */
+  .glass-card:hover {
+    background: var(--glass-hover-bg);
+    box-shadow: var(--glass-hover-shadow);
+    border-color: hsla(var(--primary), 0.4);
+  }
+
+  /* Ultra Modern 3D Effects */
   .transform-3d {
     transform: var(--transform-3d);
     box-shadow: var(--shadow-3d);
-    transition: var(--transition-smooth);
+    transition: var(--transition-ultra);
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
   .transform-3d:hover {
@@ -195,42 +218,164 @@
     box-shadow: var(--shadow-hover);
   }
 
-  /* Advanced hover animations */
+  /* Mathematical Element Styling */
+  .math-3d {
+    transform: var(--transform-math);
+    box-shadow: var(--shadow-math);
+    transition: var(--transition-spring);
+    border: 1px solid hsla(var(--math-formula), 0.2);
+    background: linear-gradient(135deg, hsla(var(--math-formula), 0.1), hsla(var(--math-formula), 0.05));
+  }
+
+  .math-3d:hover {
+    transform: var(--transform-math-hover);
+    box-shadow: var(--shadow-math-hover);
+    border-color: hsla(var(--math-formula), 0.4);
+    background: linear-gradient(135deg, hsla(var(--math-formula), 0.15), hsla(var(--math-formula), 0.08));
+  }
+
+  /* Ultra Smooth Hover Animations */
   .hover-float {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:scale-105;
-    box-shadow: var(--shadow-3d);
+    transition: var(--transition-ultra);
+    transform: translateZ(0);
   }
 
   .hover-float:hover {
+    transform: translateY(-8px) scale(1.02) translateZ(0);
     box-shadow: var(--shadow-hover);
   }
 
-  /* Rotating key animation */
+  .hover-scale {
+    transition: var(--transition-spring);
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.08) translateZ(0);
+  }
+
+  .hover-lift {
+    transition: var(--transition-elastic);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-12px) scale(1.05) translateZ(0);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Advanced Animation Keyframes */
   .key-rotate {
-    animation: rotateKey 4s linear infinite;
+    animation: rotateKey 6s ease-in-out infinite;
+    transform-origin: center;
   }
 
   @keyframes rotateKey {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    50% { transform: rotate(0deg); }
-    75% { transform: rotate(-5deg); }
-    100% { transform: rotate(0deg); }
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(8deg) scale(1.1); }
+    50% { transform: rotate(0deg) scale(1.05); }
+    75% { transform: rotate(-8deg) scale(1.1); }
   }
 
-  /* Pulsing glow effect */
   .pulse-glow {
-    animation: pulseGlow 2s ease-in-out infinite alternate;
+    animation: pulseGlow 3s ease-in-out infinite;
   }
 
   @keyframes pulseGlow {
-    from {
-      box-shadow: 0 0 20px hsla(var(--primary), 0.3);
+    0%, 100% {
+      box-shadow: 0 0 20px hsla(var(--primary), 0.3), 0 0 40px hsla(var(--primary), 0.1);
     }
-    to {
-      box-shadow: 0 0 40px hsla(var(--primary), 0.6), 0 0 60px hsla(var(--primary), 0.3);
+    50% {
+      box-shadow: 0 0 40px hsla(var(--primary), 0.6), 0 0 80px hsla(var(--primary), 0.3), 0 0 120px hsla(var(--primary), 0.1);
     }
   }
+
+  /* Mathematical Steps Enhanced Animation */
+  .math-step {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .math-step:nth-child(1) { animation-delay: 0.1s; }
+  .math-step:nth-child(2) { animation-delay: 0.2s; }
+  .math-step:nth-child(3) { animation-delay: 0.3s; }
+  .math-step:nth-child(4) { animation-delay: 0.4s; }
+  .math-step:nth-child(5) { animation-delay: 0.5s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Success Animation */
+  .success-bounce {
+    animation: successBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes successBounce {
+    0% {
+      transform: scale(0.3) rotate(-10deg);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1) rotate(5deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+  }
+
+  /* Floating Background Elements */
+  .floating-element {
+    animation: float 8s ease-in-out infinite;
+    opacity: 0.6;
+  }
+
+  .floating-element:nth-child(2) {
+    animation-delay: -2s;
+  }
+
+  .floating-element:nth-child(3) {
+    animation-delay: -4s;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-20px) rotate(2deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(0deg);
+    }
+    75% {
+      transform: translateY(-30px) rotate(-2deg);
+    }
+  }
+
+  /* Sophisticated Card Entrance */
+  .card-entrance {
+    animation: cardEntrance 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+    transform: perspective(1000px) rotateX(30deg) translateY(50px);
+  }
+
+  @keyframes cardEntrance {
+    to {
+      opacity: 1;
+      transform: perspective(1000px) rotateX(0deg) translateY(0);
+    }
+  }
+
+  /* Staggered Animation for Multiple Elements */
+  .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
 }
 
 @layer base {

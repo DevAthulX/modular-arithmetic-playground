@@ -212,33 +212,33 @@ export function RSADemo() {
       <main className="container mx-auto max-w-4xl p-4 space-y-6">
         
         {/* Progress Indicator */}
-        <Card className="glass-card hover-float transform-3d">
+        <Card className="glass-card hover-float transform-3d card-entrance">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Calculator className="w-5 h-5" />
+              <Calculator className="w-5 h-5 animate-glow-pulse" />
               RSA Encryption Process
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center stagger-animation">
               {[
                 { step: 'input', label: '1. Input Primes', icon: '🔢' },
                 { step: 'keys', label: '2. Generate Keys', icon: '🔑' },
                 { step: 'encrypt', label: '3. Encrypt Message', icon: '🔒' },
                 { step: 'complete', label: '4. Decrypt & Verify', icon: '✅' }
               ].map((item, index) => (
-                <div key={item.step} className="flex items-center">
+                <div key={item.step} className="flex items-center animate-fade-in">
                   <div className={`
-                    flex items-center gap-2 px-3 py-2 rounded-lg transition-smooth
+                    flex items-center gap-3 px-4 py-3 rounded-xl transition-ultra transform hover:scale-105
                     ${currentStep === item.step || (index < ['input', 'keys', 'encrypt', 'complete'].indexOf(currentStep)) 
-                      ? 'bg-primary text-primary-foreground' 
-                      : 'bg-muted text-muted-foreground'}
+                      ? 'bg-primary text-primary-foreground shadow-lg animate-glow-pulse' 
+                      : 'bg-muted/50 text-muted-foreground hover:bg-muted'}
                   `}>
-                    <span>{item.icon}</span>
-                    <span className="text-sm font-medium">{item.label}</span>
+                    <span className="text-lg">{item.icon}</span>
+                    <span className="text-sm font-semibold">{item.label}</span>
                   </div>
                   {index < 3 && (
-                    <ArrowRight className="w-4 h-4 mx-2 text-muted-foreground" />
+                    <ArrowRight className="w-5 h-5 mx-3 text-muted-foreground animate-float" />
                   )}
                 </div>
               ))}
@@ -247,7 +247,7 @@ export function RSADemo() {
         </Card>
 
         {/* Step 1: Prime Input */}
-        <Card className="glass-card hover-float transform-3d animate-fade-in">
+        <Card className="glass-card hover-float transform-3d animate-morph-in">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Key className="w-5 h-5 text-primary" />
@@ -322,7 +322,7 @@ export function RSADemo() {
 
         {/* Step 2: Generated Keys */}
         {keyPair && (
-          <Card className="glass-card hover-float transform-3d animate-bounce-in">
+          <Card className="glass-card hover-float transform-3d animate-bounce-in success-bounce">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Key className="w-5 h-5 public-key-color" />
@@ -330,40 +330,67 @@ export function RSADemo() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-4 rounded-lg math-gradient hover-scale transform-3d">
-                  <h4 className="font-semibold text-public-key mb-2 flex items-center gap-2">
-                    <Lock className="w-4 h-4" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-animation">
+                <div className="math-3d p-6 rounded-xl hover-lift animate-slide-up">
+                  <h4 className="font-bold text-public-key mb-3 flex items-center gap-2 text-lg">
+                    <Lock className="w-5 h-5 animate-glow-pulse" />
                     Public Key (e, n)
                   </h4>
-                  <div className="math-font space-y-1">
-                    <p><span className="text-muted-foreground">e =</span> <span className="public-key-color font-bold">{keyPair.e.toString()}</span></p>
-                    <p><span className="text-muted-foreground">n =</span> <span className="public-key-color font-bold">{keyPair.n.toString()}</span></p>
+                  <div className="math-font space-y-3 text-lg">
+                    <p className="flex items-center gap-3">
+                      <span className="text-muted-foreground font-semibold">e =</span> 
+                      <span className="public-key-color font-bold bg-public-key/10 px-3 py-1 rounded-lg animate-math-highlight">
+                        {keyPair.e.toString()}
+                      </span>
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <span className="text-muted-foreground font-semibold">n =</span> 
+                      <span className="public-key-color font-bold bg-public-key/10 px-3 py-1 rounded-lg animate-math-highlight">
+                        {keyPair.n.toString()}
+                      </span>
+                    </p>
                   </div>
                 </div>
                 
-                <div className="p-4 rounded-lg math-gradient hover-scale transform-3d">
-                  <h4 className="font-semibold text-private-key mb-2 flex items-center gap-2">
-                    <Unlock className="w-4 h-4" />
+                <div className="math-3d p-6 rounded-xl hover-lift animate-slide-up">
+                  <h4 className="font-bold text-private-key mb-3 flex items-center gap-2 text-lg">
+                    <Unlock className="w-5 h-5 animate-glow-pulse" />
                     Private Key (d, n)
                   </h4>
-                  <div className="math-font space-y-1">
-                    <p><span className="text-muted-foreground">d =</span> <span className="private-key-color font-bold">{keyPair.d.toString()}</span></p>
-                    <p><span className="text-muted-foreground">n =</span> <span className="private-key-color font-bold">{keyPair.n.toString()}</span></p>
+                  <div className="math-font space-y-3 text-lg">
+                    <p className="flex items-center gap-3">
+                      <span className="text-muted-foreground font-semibold">d =</span> 
+                      <span className="private-key-color font-bold bg-private-key/10 px-3 py-1 rounded-lg animate-math-highlight">
+                        {keyPair.d.toString()}
+                      </span>
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <span className="text-muted-foreground font-semibold">n =</span> 
+                      <span className="private-key-color font-bold bg-private-key/10 px-3 py-1 rounded-lg animate-math-highlight">
+                        {keyPair.n.toString()}
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Mathematical Steps */}
-              <Accordion type="single" collapsible>
-                <AccordionItem value="math-steps">
-                  <AccordionTrigger>Show Mathematical Steps</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="space-y-2 text-sm math-font">
+              <Accordion type="single" collapsible className="mt-6">
+                <AccordionItem value="math-steps" className="border border-math-formula/20 rounded-xl">
+                  <AccordionTrigger className="px-6 py-4 hover:bg-math-formula/5 transition-ultra rounded-xl">
+                    <div className="flex items-center gap-2">
+                      <BookOpen className="w-5 h-5 text-math-formula" />
+                      <span className="font-semibold">Show Mathematical Steps</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <div className="space-y-4 math-font">
                       {keyPair.steps.map((step, index) => (
-                        <div key={index} className="flex items-start gap-2">
-                          <Badge variant="outline" className="shrink-0">{index + 1}</Badge>
-                          <span>{step}</span>
+                        <div key={index} className="math-step flex items-start gap-4 p-4 rounded-xl bg-math-formula/5 border border-math-formula/10 hover:border-math-formula/20 transition-ultra">
+                          <Badge variant="outline" className="shrink-0 bg-math-formula text-background font-bold text-sm px-3 py-1">
+                            {index + 1}
+                          </Badge>
+                          <span className="text-base leading-relaxed text-math-formula font-medium">{step}</span>
                         </div>
                       ))}
                     </div>
@@ -401,30 +428,43 @@ export function RSADemo() {
 
         {/* Step 3: Encryption */}
         {encryptionResult && (
-          <Card className="glass-card hover-float transform-3d animate-bounce-in">
+          <Card className="glass-card hover-float transform-3d animate-bounce-in success-bounce">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Lock className="w-5 h-5 text-primary" />
                 Step 3: Message Encryption
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="p-4 rounded-lg bg-muted">
-                <h4 className="font-semibold mb-2">Encrypted Message (Ciphertext)</h4>
-                <div className="math-font text-sm break-all">
-                  [{encryptionResult.ciphertext.join(', ')}]
+            <CardContent className="space-y-6">
+              <div className="math-3d p-6 rounded-xl animate-morph-in">
+                <h4 className="font-bold mb-4 flex items-center gap-2 text-lg">
+                  <Lock className="w-5 h-5 text-primary animate-glow-pulse" />
+                  Encrypted Message (Ciphertext)
+                </h4>
+                <div className="math-font text-lg break-all bg-primary/10 p-4 rounded-lg border-2 border-primary/20 animate-shimmer overflow-hidden relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent animate-shimmer"></div>
+                  <span className="relative z-10 font-bold text-primary">
+                    [{encryptionResult.ciphertext.join(', ')}]
+                  </span>
                 </div>
               </div>
 
               <Accordion type="single" collapsible>
-                <AccordionItem value="encrypt-steps">
-                  <AccordionTrigger>Show Encryption Steps</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="space-y-2 text-sm math-font">
+                <AccordionItem value="encrypt-steps" className="border border-primary/20 rounded-xl">
+                  <AccordionTrigger className="px-6 py-4 hover:bg-primary/5 transition-ultra rounded-xl">
+                    <div className="flex items-center gap-2">
+                      <Calculator className="w-5 h-5 text-primary" />
+                      <span className="font-semibold">Show Encryption Steps</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <div className="space-y-4 math-font">
                       {encryptionResult.steps.map((step, index) => (
-                        <div key={index} className="flex items-start gap-2">
-                          <Badge variant="outline" className="shrink-0">{index + 1}</Badge>
-                          <span>{step}</span>
+                        <div key={index} className="math-step flex items-start gap-4 p-4 rounded-xl bg-primary/5 border border-primary/10 hover:border-primary/20 transition-ultra">
+                          <Badge variant="outline" className="shrink-0 bg-primary text-primary-foreground font-bold text-sm px-3 py-1">
+                            {index + 1}
+                          </Badge>
+                          <span className="text-base leading-relaxed font-medium">{step}</span>
                         </div>
                       ))}
                     </div>
@@ -445,38 +485,48 @@ export function RSADemo() {
 
         {/* Step 4: Decryption */}
         {decryptionResult && (
-          <Card className="glass-card hover-float transform-3d animate-bounce-in pulse-glow">
+          <Card className="glass-card hover-float transform-3d animate-bounce-in success-bounce pulse-glow">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-success animate-pulse" />
                 Step 4: Message Decryption - Success!
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="p-4 rounded-lg bg-success/10 border border-success/20">
-                <h4 className="font-semibold text-success mb-2">Decrypted Message</h4>
-                <div className="text-lg font-mono">
-                  "{decryptionResult.decrypted}"
+            <CardContent className="space-y-6">
+              <div className="math-3d p-8 rounded-xl bg-success/10 border-2 border-success/30 animate-morph-in">
+                <h4 className="font-bold text-success mb-4 flex items-center gap-2 text-xl">
+                  <CheckCircle className="w-6 h-6 animate-glow-pulse" />
+                  Decrypted Message
+                </h4>
+                <div className="text-2xl font-mono bg-success/20 p-6 rounded-xl border border-success/30 text-center animate-math-highlight">
+                  <span className="text-success font-bold">"{decryptionResult.decrypted}"</span>
                 </div>
               </div>
 
-              <Alert>
-                <CheckCircle className="w-4 h-4" />
-                <AlertDescription>
-                  <strong>Success!</strong> The original message has been perfectly recovered using RSA decryption. 
-                  This demonstrates the mathematical beauty of modular arithmetic and number theory.
+              <Alert className="border-success/30 bg-success/5 animate-fade-in">
+                <CheckCircle className="w-5 h-5 text-success animate-glow-pulse" />
+                <AlertDescription className="text-base">
+                  <strong className="text-success">Perfect Success!</strong> The original message has been flawlessly recovered using RSA decryption. 
+                  This demonstrates the elegant mathematical foundation of modular arithmetic and number theory in cryptography.
                 </AlertDescription>
               </Alert>
 
               <Accordion type="single" collapsible>
-                <AccordionItem value="decrypt-steps">
-                  <AccordionTrigger>Show Decryption Steps</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="space-y-2 text-sm math-font">
+                <AccordionItem value="decrypt-steps" className="border border-success/20 rounded-xl">
+                  <AccordionTrigger className="px-6 py-4 hover:bg-success/5 transition-ultra rounded-xl">
+                    <div className="flex items-center gap-2">
+                      <Unlock className="w-5 h-5 text-success" />
+                      <span className="font-semibold">Show Decryption Steps</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <div className="space-y-4 math-font">
                       {decryptionResult.steps.map((step, index) => (
-                        <div key={index} className="flex items-start gap-2">
-                          <Badge variant="outline" className="shrink-0">{index + 1}</Badge>
-                          <span>{step}</span>
+                        <div key={index} className="math-step flex items-start gap-4 p-4 rounded-xl bg-success/5 border border-success/10 hover:border-success/20 transition-ultra">
+                          <Badge variant="outline" className="shrink-0 bg-success text-background font-bold text-sm px-3 py-1">
+                            {index + 1}
+                          </Badge>
+                          <span className="text-base leading-relaxed text-success font-medium">{step}</span>
                         </div>
                       ))}
                     </div>
