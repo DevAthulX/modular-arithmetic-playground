@@ -371,11 +371,13 @@
     }
   }
 
-  /* Staggered Animation for Multiple Elements */
-  .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
-  .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
-  .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
-  .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+  /* Grid pattern for footer background */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(hsl(var(--muted-foreground) / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--muted-foreground) / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
 }
 
 @layer base {
