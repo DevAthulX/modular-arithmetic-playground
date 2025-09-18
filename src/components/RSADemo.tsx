@@ -55,7 +55,44 @@ export function RSADemo() {
   const [decryptionResult, setDecryptionResult] = useState<DecryptionResult | null>(null);
   const [currentStep, setCurrentStep] = useState<'input' | 'keys' | 'encrypt' | 'decrypt' | 'complete'>('input');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number, speed: number}>>([]);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isTyping, setIsTyping] = useState(false);
   const { toast } = useToast();
+
+  // Initialize particle system
+  useEffect(() => {
+    const newParticles = Array.from({ length: 15 }, (_, i) => ({
+      id: i,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: Math.random() * 4 + 1,
+      speed: Math.random() * 2 + 0.5
+    }));
+    setParticles(newParticles);
+
+    // Animate particles
+    const animateParticles = () => {
+      setParticles(prev => prev.map(particle => ({
+        ...particle,
+        x: (particle.x + particle.speed) % window.innerWidth,
+        y: particle.y + Math.sin(particle.x * 0.01) * 0.5
+      })));
+    };
+
+    const interval = setInterval(animateParticles, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Mouse tracking for interactive effects
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const resetDemo = () => {
     setP('');
@@ -181,18 +218,53 @@ export function RSADemo() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Dynamic Particle System */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        {particles.map(particle => (
+          <div
+            key={particle.id}
+            className="absolute rounded-full bg-gradient-to-r from-primary/20 via-math-formula/20 to-accent/20 animate-pulse"
+            style={{
+              left: `${particle.x}px`,
+              top: `${particle.y}px`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              transform: `translate(-50%, -50%) scale(${1 + Math.sin(Date.now() * 0.001 + particle.id) * 0.3})`,
+              filter: 'blur(1px)'
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Interactive Mouse Follower */}
+      <div 
+        className="fixed w-8 h-8 bg-gradient-to-r from-primary/10 to-math-formula/10 rounded-full pointer-events-none z-50 mix-blend-multiply transition-all duration-300 animate-pulse"
+        style={{
+          left: `${mousePosition.x - 16}px`,
+          top: `${mousePosition.y - 16}px`,
+          transform: 'scale(1.5)',
+          filter: 'blur(2px)'
+        }}
+      />
+
       {/* Professional Header */}
-      <header className="relative min-h-[400px] bg-gradient-to-br from-background via-muted/20 to-background border-b border-border/50 overflow-hidden">
-        {/* Animated Grid Background */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] animate-pulse"></div>
+      <header className="relative min-h-[500px] bg-gradient-to-br from-background via-muted/20 to-background border-b border-border/50 overflow-hidden z-10">
+        {/* Enhanced Animated Grid Background */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-math-formula/5 animate-gradient-shift"></div>
         
-        {/* Floating Geometric Elements */}
+        {/* Enhanced Floating Mathematical Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-[10%] w-2 h-2 bg-primary/40 rounded-full animate-float" style={{animationDelay: '0s'}}></div>
-          <div className="absolute top-32 right-[15%] w-1 h-1 bg-math-formula/60 rounded-full animate-float" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-24 left-[20%] w-3 h-3 bg-accent/30 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
-          <div className="absolute top-40 left-1/2 w-1.5 h-1.5 bg-primary/50 rounded-full animate-float" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute top-20 left-[10%] w-4 h-4 bg-primary/40 rounded-full animate-orbit" style={{animationDelay: '0s'}}></div>
+          <div className="absolute top-32 right-[15%] w-2 h-2 bg-math-formula/60 rounded-full animate-spiral" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-24 left-[20%] w-6 h-6 bg-accent/30 rounded-full animate-morph" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-40 left-1/2 w-3 h-3 bg-primary/50 rounded-full animate-pulse-glow" style={{animationDelay: '1.5s'}}></div>
+          
+          {/* Mathematical Symbols */}
+          <div className="absolute top-16 right-[25%] text-6xl text-primary/10 font-bold animate-rotate-3d" style={{animationDelay: '0.5s'}}>∑</div>
+          <div className="absolute bottom-32 left-[15%] text-4xl text-math-formula/10 font-bold animate-bounce-3d" style={{animationDelay: '2.5s'}}>π</div>
+          <div className="absolute top-1/3 right-[8%] text-5xl text-accent/10 font-bold animate-wiggle" style={{animationDelay: '1.8s'}}>∏</div>
         </div>
 
         <div className="container mx-auto max-w-7xl px-6 relative z-10 h-full flex items-center">
