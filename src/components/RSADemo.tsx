@@ -182,31 +182,105 @@ export function RSADemo() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="header-gradient text-primary-foreground py-12 px-4 relative overflow-hidden">
-        <div className="container mx-auto max-w-7xl">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-6">
-              <div className="relative">
-                <Key className="w-16 h-16 key-rotate pulse-glow" />
-                <div className="absolute inset-0 w-16 h-16 rounded-full bg-primary/30 blur-xl animate-pulse"></div>
+      {/* Professional Header */}
+      <header className="relative min-h-[400px] bg-gradient-to-br from-background via-muted/20 to-background border-b border-border/50 overflow-hidden">
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] animate-pulse"></div>
+        
+        {/* Floating Geometric Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-[10%] w-2 h-2 bg-primary/40 rounded-full animate-float" style={{animationDelay: '0s'}}></div>
+          <div className="absolute top-32 right-[15%] w-1 h-1 bg-math-formula/60 rounded-full animate-float" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-24 left-[20%] w-3 h-3 bg-accent/30 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-40 left-1/2 w-1.5 h-1.5 bg-primary/50 rounded-full animate-float" style={{animationDelay: '1.5s'}}></div>
+        </div>
+
+        <div className="container mx-auto max-w-7xl px-6 relative z-10 h-full flex items-center">
+          <div className="w-full py-16">
+            <div className="flex justify-between items-start mb-12">
+              <div className="flex items-center gap-8">
+                {/* Animated Logo */}
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-math-formula/20 to-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700 animate-pulse"></div>
+                  <div className="relative bg-gradient-to-br from-primary/10 via-math-formula/5 to-accent/10 p-6 rounded-2xl border border-primary/20 backdrop-blur-sm hover:border-primary/40 transition-all duration-500 transform hover:scale-105 group">
+                    <Lock className="w-12 h-12 text-primary animate-glow-pulse group-hover:rotate-12 transition-all duration-500" />
+                    <Key className="w-8 h-8 text-math-formula absolute -top-2 -right-2 animate-bounce" style={{animationDelay: '0.5s'}} />
+                  </div>
+                </div>
+
+                {/* Title Section */}
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <h1 className="text-6xl font-bold bg-gradient-to-r from-foreground via-primary to-math-formula bg-clip-text text-transparent animate-fade-in hover:scale-[1.02] transition-all duration-500 cursor-default">
+                      RSA Cryptography
+                    </h1>
+                    <div className="text-2xl text-muted-foreground animate-slide-up" style={{animationDelay: '0.2s'}}>
+                      Interactive Educational Platform
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-4 animate-slide-up" style={{animationDelay: '0.4s'}}>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
+                      <BookOpen className="w-4 h-4 text-primary animate-glow-pulse" />
+                      <span className="text-sm font-medium text-primary">Class 12 Mathematics</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-math-formula/10 rounded-full border border-math-formula/20">
+                      <Calculator className="w-4 h-4 text-math-formula animate-glow-pulse" />
+                      <span className="text-sm font-medium text-math-formula">Number Theory</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h1 className="text-5xl font-bold mb-3 hover:scale-105 transition-all duration-300">
-                  Interactive RSA Encryption Learner
-                </h1>
-                <p className="text-xl opacity-90">Class 12 Mathematics • Cryptography & Number Theory</p>
+
+              {/* Theme Toggle */}
+              <div className="animate-fade-in" style={{animationDelay: '0.6s'}}>
+                <ThemeToggle />
               </div>
             </div>
-            <ThemeToggle />
+
+            {/* Professional Stats/Features */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-stagger-in">
+              <div className="group p-6 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-500 hover:shadow-lg hover:shadow-primary/10 transform hover:-translate-y-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
+                    <Lock className="w-5 h-5 text-primary animate-glow-pulse" />
+                  </div>
+                  <h3 className="font-bold text-primary">Secure Encryption</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Learn the mathematical foundations of RSA public-key cryptography through interactive demonstrations
+                </p>
+              </div>
+
+              <div className="group p-6 bg-gradient-to-br from-math-formula/5 via-transparent to-math-formula/10 rounded-xl border border-math-formula/20 hover:border-math-formula/40 transition-all duration-500 hover:shadow-lg hover:shadow-math-formula/10 transform hover:-translate-y-1" style={{animationDelay: '0.2s'}}>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 bg-math-formula/20 rounded-lg group-hover:bg-math-formula/30 transition-colors">
+                    <Calculator className="w-5 h-5 text-math-formula animate-glow-pulse" />
+                  </div>
+                  <h3 className="font-bold text-math-formula">Step-by-Step Learning</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Detailed mathematical explanations with visual feedback for every encryption and decryption process
+                </p>
+              </div>
+
+              <div className="group p-6 bg-gradient-to-br from-accent/5 via-transparent to-accent/10 rounded-xl border border-accent/20 hover:border-accent/40 transition-all duration-500 hover:shadow-lg hover:shadow-accent/10 transform hover:-translate-y-1" style={{animationDelay: '0.4s'}}>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 bg-accent/20 rounded-lg group-hover:bg-accent/30 transition-colors">
+                    <CheckCircle className="w-5 h-5 text-accent animate-glow-pulse" />
+                  </div>
+                  <h3 className="font-bold text-accent">Real-World Applications</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Understand how RSA powers modern internet security, banking systems, and digital communications
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        {/* Enhanced animated background elements */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/15 rounded-full blur-3xl animate-float floating-element"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-accent/15 rounded-full blur-2xl animate-float floating-element"></div>
-          <div className="absolute top-1/2 right-1/3 w-24 h-24 bg-primary/10 rounded-full blur-xl animate-float floating-element"></div>
-        </div>
+
+        {/* Subtle Animated Border */}
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent animate-shimmer-once"></div>
       </header>
 
       {/* Main Content */}
