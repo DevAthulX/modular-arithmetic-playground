@@ -311,11 +311,28 @@ export function RSADemo() {
             </div>
 
             {/* Prime Number Helper */}
-            <Alert>
-              <BookOpen className="w-4 h-4" />
-              <AlertDescription>
-                <strong>Prime Numbers:</strong> Natural numbers greater than 1 that have no positive divisors other than 1 and themselves. 
-                Examples: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47...
+            <Alert className="glass-card border-math-formula/30 bg-gradient-to-r from-math-formula/5 to-primary/5 hover:from-math-formula/10 hover:to-primary/10 transition-ultra animate-fade-in hover-float">
+              <BookOpen className="w-5 h-5 text-math-formula animate-glow-pulse" />
+              <AlertDescription className="space-y-3">
+                <div className="math-3d p-4 rounded-xl bg-math-formula/5 border border-math-formula/20 animate-morph-in">
+                  <p className="text-base leading-relaxed">
+                    <span className="font-bold text-math-formula text-lg animate-math-highlight">Prime Numbers:</span> 
+                    <span className="ml-2 animate-slide-up">Natural numbers greater than 1 that have no positive divisors other than 1 and themselves.</span>
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 animate-stagger-in">
+                  <span className="text-muted-foreground font-semibold">Examples:</span>
+                  {[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47].map((prime, index) => (
+                    <span 
+                      key={prime}
+                      className="inline-flex items-center px-3 py-1 rounded-full bg-math-formula/20 text-math-formula font-bold border border-math-formula/30 hover:bg-math-formula/30 hover:scale-110 transition-ultra cursor-default animate-bounce-in hover-float"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      {prime}
+                    </span>
+                  ))}
+                  <span className="text-math-formula/70 font-semibold animate-pulse">...</span>
+                </div>
               </AlertDescription>
             </Alert>
           </CardContent>
